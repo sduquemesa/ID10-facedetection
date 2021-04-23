@@ -2,14 +2,17 @@
   "name": "id10",
   "version": "1.0.0",
   "description": "Source code for a face-detection art webapp",
+  "homepage": "https://sduquemesa.github.io/ID10-facedetection",
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "predeploy": "rm -rf dist && npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "ID10-facedetection"
+    "url": "https://github.com/sduquemesa/ID10-facedetection"
   },
   "keywords": [
     "ml5",
@@ -21,6 +24,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.13.16",
+    "gh-pages": "^3.1.0",
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
