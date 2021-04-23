@@ -1,0 +1,30 @@
+{
+  "name": "id10",
+  "version": "1.0.0",
+  "description": "Source code for a face-detection art webapp",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ID10-facedetection"
+  },
+  "keywords": [
+    "ml5",
+    "p5js",
+    "tonejs",
+    "imagefest"
+  ],
+  "author": "sduquemesa",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "ml5": "^0.6.1",
+    "p5": "^1.3.1"
+  }
+}
