@@ -9,17 +9,18 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -10;
 }
 
 #p5js-container {
   width: 100vw;
   height: 100vh;
+  z-index: 10;
 }
 
 #hydra-container {
   width: 100vw;
   height: 100vh;
-  border: 3px solid #73AD21;
 }
 
 #hydra-canvas {
