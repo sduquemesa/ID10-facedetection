@@ -25,11 +25,12 @@ const p5Instance = new p5(sketch => {
   };
 
   sketch.draw = () => {
-    sketch.clear(0);
+    sketch.clear()
+    sketch.background(100,0.99);
 
     // sketch.image(video, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     // faceapi.draw();
-    facemesh.draw();
+    // facemesh.draw();
   };
 }, window.document.getElementById('p5js-container'));
 
