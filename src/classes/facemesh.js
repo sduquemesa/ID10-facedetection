@@ -26,7 +26,8 @@ export default class FaceMesh {
 
                 sketch.push();
                 sketch.fill(0, 255, 0);
-                sketch.ellipse(x, y, 5, 5);
+                // the 2 multiplying here scales the keypoints to fit screen
+                sketch.ellipse(2*x, 2*y, 5, 5);
                 sketch.pop();
             }
         }
