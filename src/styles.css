@@ -4,6 +4,11 @@ body {
     overflow: hidden;
   }
 
-  canvas {
-    display: block;
-  }
+canvas {
+  display: block;
+}
+
+#p5js-container {
+  width: 100px;
+  height: 100px;
+}
