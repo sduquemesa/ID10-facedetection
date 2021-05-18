@@ -5,8 +5,14 @@ import FaceApi from "./classes/faceapi";
 import FaceMesh from "./classes/facemesh";
 import Hydra from 'hydra-synth';
 
-// const hydra = new Hydra({ detectAudio: false })
-// osc(10, 0.1, 0.8).rotate(0, 0.1).kaleid().color(-1, 1).out()
+const hydra = new Hydra({
+    detectAudio: false,
+    canvas: document.getElementById('hydra-canvas')
+})
+osc(10, 0.1, 0.8).rotate(0, 0.1).kaleid().color(-1, 1).out()
+
+
+
 
 const p5Instance = new p5(sketch => {
   let video;

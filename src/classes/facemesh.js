@@ -1,4 +1,4 @@
-import sketch from "..";
+import sketch from "../index";
 import ml5 from "ml5";
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from "../constants";
 
