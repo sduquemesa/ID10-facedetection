@@ -30,7 +30,7 @@ const p5Instance = new p5(sketch => {
   };
 
   sketch.draw = () => {
-    sketch.background(0);
+    sketch.clear(0);
 
     // sketch.image(video, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     // faceapi.draw();
