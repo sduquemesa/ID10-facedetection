@@ -1,2 +1,0 @@
-body{padding:0;margin:0;overflow:hidden}canvas{position:fixed;z-index:-10}#qr-canvas,canvas{display:block;top:0;left:0}#qr-canvas{padding:0;margin:auto;width:800px;height:600px;position:absolute;bottom:0;right:0;opacity:.5}#p5js-container{z-index:10}#hydra-container,#p5js-container{width:100vw;height:100vh}#hydra-canvas{width:100%;height:100%}
-/*# sourceMappingURL=/ID10-facedetection/p5script.9fb1dfc0.css.map */
