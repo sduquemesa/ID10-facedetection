@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-family: 'Roboto', sans-serif;
   }
 
 canvas {
@@ -18,15 +19,19 @@ canvas {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 640px;
-  height: 480px;
+  width: 642px;
+  height: 482px;
   z-index: 10;
   opacity: 0.85;
+  border-color: white;
+  padding: 0;
+  margin: 0;
 }
 
 #hydra-container {
   width: 100vw;
   height: 100vh;
+  z-index: 200;
 }
 
 #hydra-canvas {
@@ -36,34 +41,124 @@ canvas {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
-  padding: 14px 16px;
+  padding: 3px 1em;
   text-decoration: none;
   font-size: 17px;
+  margin: 30px;
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  border-bottom: 1px solid white;
+  transition: border-color 0ms linear 150s;
 }
 
-/* Add an active class to highlight the current page */
-.topnav a.active {
-  background-color: #04AA6D;
+.landing-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 640px;
+  height: 480px;
+  z-index: 10;
+  opacity: 0.85;
+  border-color: black;
+  border-style: solid;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: 'Inconsolata', monospace;
+  font-weight: 500;
+  font-size: 200%;
+}
+
+.title #subtitle {
+  font-weight: 300;
+}
+
+
+.button {
+  position: fixed;
+  left: 50%;
+  bottom: 5%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+
+.button:hover {
+  background-color: #555555;
   color: white;
 }
 
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
+#overlay {
+  position: fixed;
   display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 100;
+  cursor: pointer;
+}
+
+#info-text {
+  padding: 2rem;
+}
+.button-info {
+  background-color: white;
+  color: black;
+  box-shadow: none;
+  text-decoration: underline;
+  border-color: white;
+}
+
+#overlay-aceptar {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 100;
+  cursor: pointer;
 }

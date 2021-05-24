@@ -1,15 +1,13 @@
-import sketch from "../facedetection";
 import ml5 from "ml5";
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from "../constants";
-
 export default class FaceMesh {
 
-    constructor(video) {
+    constructor(video, sketch) {
         this.facemesh = ml5.facemesh(video, {maxFaces: 1},() => console.log("Facemesh model ready!"));
         this.predictions = [];
         this.facemesh.on("predict", results => {
             this.predictions = results;
         });
+        this.sketch = sketch;
     }
 
     draw() {
@@ -40,11 +38,11 @@ export default class FaceMesh {
             for (let j = 0; j < keypoints.length; j += 1) {
                 const [x, y] = keypoints[j];
 
-                sketch.push();
-                sketch.fill(255);
-                sketch.noStroke();
-                sketch.ellipse(x, y, 4, 4);
-                sketch.pop();
+                this.sketch.push();
+                this.sketch.fill(255);
+                this.sketch.noStroke();
+                this.sketch.ellipse(x, y, 4, 4);
+                this.sketch.pop();
             }
 
             // Shuffle array
