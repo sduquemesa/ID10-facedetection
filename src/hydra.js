@@ -5,17 +5,19 @@ const hydra = new Hydra({
     canvas: document.getElementById('hydra-canvas')
 })
 
+console.log(hydra)
+
 let funcList = [
 
-    (rotation, openingX, openingY, height1, heigth2) => {
-        osc(3*rotation/10,0.6*rotation,0.9)
-            .rotate(rotation/10)
-            .blend(
-                voronoi(25,2,10).color(0,0.1,0.1).brightness(0.01)
-            )
-            .pixelate(20+200*openingX,20+200*openingY)
-            .out()
-    },
+    // (rotation, openingX, openingY, height1, heigth2) => {
+    //     osc(3*rotation/10,0.6*rotation,0.9)
+    //         .rotate(rotation/10)
+    //         .blend(
+    //             voronoi(25,2,10).color(0,0.1,0.1).brightness(0.01)
+    //         )
+    //         .pixelate(20+200*openingX,20+200*openingY)
+    //         .out()
+    // },
 
     // () => {
     //     osc(3,0.6,0.9).rotate(23).blend(osc(23,0.27,0.46)).pixelate(100,100).out()
@@ -33,18 +35,18 @@ let funcList = [
     //     osc(600,9,0.07999).diff(o0).rotate(0.1).out(o0)
     // },
 
-    // () => {
-    //     voronoi(350,0.15)
-    //         .modulateScale(osc(0.1).rotate(Math.sin(time)),.5)
-    //         .thresh(.1)
-    //         .modulateRotate(osc(7),.4)
-    //         .thresh(.7)
-    //         .diff(src(o0).scale(1.8))
-    //         .modulateScale(osc(2).modulateRotate(o0,.74))
-    //         .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
-    //         .brightness([-.02,-.17].smooth().fast(.5))
-    //         .out()
-    // },
+    () => {
+        voronoi(350,0.15)
+            .modulateScale(osc(0.1).rotate(Math.sin(time)),.5)
+            .thresh(.1)
+            .modulateRotate(osc(7),.4)
+            .thresh(.7)
+            .diff(src(o0).scale(1.8))
+            .modulateScale(osc(2).modulateRotate(o0,.74))
+            .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
+            .brightness([-.02,-.17].smooth().fast(.5))
+            .out()
+    },
 
     // () => {
     //     solid(.7,.45, .125)
@@ -69,54 +71,58 @@ let funcList = [
     //     render(o1)
     // },
 
-    (rotation, openingX, openingY, height1, heigth2) => {
-        render(o2)
-        s0.initCam()
-        src(o0)
-        .blend(s0, 0.4)
-        .modulate(o0, 0.1)
-        // .saturate(1.01)
-        // .contrast(1.01)
-        // .colorama()
-        // .scale(1.01)
-        .out(o0)
-        voronoi(50+300*openingY,0.05,0.1)
-        .rotate(rotation,0)
-        .modulate(o0, 5*height1)
-        .out(o1)
-        src(o0).diff(o1,1).out(o2)
-    },
+    // (rotation, openingX, openingY, height1, heigth2) => {
+    //     render(o2)
+    //     s0.initCam()
+    //     src(o0)
+    //     .blend(s0, 0.4)
+    //     .modulate(o0, 0.1)
+    //     // .saturate(1.01)
+    //     // .contrast(1.01)
+    //     // .colorama()
+    //     // .scale(1.01)
+    //     .out(o0)
+    //     voronoi(50+300*openingY,0.05,0.1)
+    //     .rotate(rotation,0)
+    //     .modulate(o0, 5*height1)
+    //     .out(o1)
+    //     src(o0).diff(o1,1).out(o2)
+    // },
 
-    (rotation, openingX, openingY, height1, heigth2) => {
-        s0.initCam()
-        src(s0)
-            .blend(o0)
-            // .saturate(1.4)
-        .colorama(-0.1+0.2*rotation)
-        .kaleid(8)
-        .out(o0)
-        shape(176, () => openingY)
-        .modulate(noise(1,height1))
-        .out(o1)
-        src(o0)
-        .modulateScale(o1)
-        .out(o3)
-        render(o3)
-    },
+    // (rotation, openingX, openingY, height1, heigth2) => {
+    //     s0.initCam()
+    //     src(s0)
+    //         .blend(o0)
+    //         // .saturate(1.4)
+    //     .colorama(-0.1+0.2*rotation)
+    //     .kaleid(8)
+    //     .out(o0)
+    //     shape(176, () => openingY)
+    //     .modulate(noise(1,height1))
+    //     .out(o1)
+    //     src(o0)
+    //     .modulateScale(o1)
+    //     .out(o3)
+    //     render(o3)
+    // },
 
-    (rotation, openingX, openingY, height1, heigth2) => {
-        s0.initCam();
-        src(s0).repeat(openingX+1,openingY+1,height1, heigth2).modulate(o0,3+2*rotation).saturate(3.872).out();
-        render(o0);
-    }
+    // (rotation, openingX, openingY, height1, heigth2) => {
+    //     s0.initCam();
+    //     src(s0)
+    //         // .rotate(rotation)
+    //         .repeat(openingX*2+5,openingY*2+5,height1, heigth2)
+    //         .modulate(o0,rotation)
+    //         .saturate(0)
+    //         .out();
+    //     render(o0);
+    // }
 
 ]
 
-let randomIndex = Math.floor(Math.random() * funcList.length)
-let func = funcList[randomIndex]
-console.log(randomIndex)
+// let randomIndex = Math.floor(Math.random() * funcList.length)
+// let func = funcList[randomIndex]
 
-var mainLoopId = setInterval(function(){
+var hydraLoopId = setInterval(function(){
     if (facemesh.predictions[0] !== undefined) {
         let faceWidth = facemesh.predictions[0].boundingBox.bottomRight[0][0] - facemesh.predictions[0].boundingBox.topLeft[0][0]
         let faceHeight = facemesh.predictions[0].boundingBox.bottomRight[0][1] - facemesh.predictions[0].boundingBox.topLeft[0][1]
@@ -131,6 +137,6 @@ var mainLoopId = setInterval(function(){
 
         func(faceRotation,mouthOpeningX,mouthOpeningY,eyeToEyebrowLeft,eyeToEyebrowRight)
 
-        // console.log(faceRotation, mouthOpeningX, mouthOpeningY, eyeToEyebrowLeft, eyeToEyebrowRight)
+        console.log(faceRotation, mouthOpeningX, mouthOpeningY, eyeToEyebrowLeft, eyeToEyebrowRight)
     }
 }, 50);
