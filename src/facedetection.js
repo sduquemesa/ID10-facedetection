@@ -4,6 +4,7 @@ import FaceMesh from "./classes/facemesh";
 import Hydra from 'hydra-synth';
 
 let facemesh;
+var sketchRef;
 
 export const start_hydra = () => {
   const hydra = new Hydra({
@@ -12,16 +13,14 @@ export const start_hydra = () => {
     precision: 'highp'
   })
 
-  console.log(hydra)
-
   let hydra_func = (rotation, openingX, openingY, height1, heigth2) => {
     s0.initCam();
     src(s0)
       .rotate(rotation / 4)
       .repeat(openingX * 6 + 5, openingY * 6 + 5, height1, heigth2)
       .modulate(o0, 0.2 - 3 * openingY)
-      .saturate(() => (Math.sin(time * 0.1)+1)/2)
-      .pixelate(100,100)
+      .saturate(() => (Math.sin(time * 0.1) + 1) / 2)
+      .pixelate(100, 100)
       .blend(o0)
       .out();
     render(o0);
@@ -47,7 +46,8 @@ export const start_hydra = () => {
 
 const containerElement = document.getElementById('p5js-container')
 
-export let sketch = (sketch) => {
+export let p5sketch = (sketch) => {
+
   let video;
   const width = containerElement.getBoundingClientRect().width
   const height = containerElement.getBoundingClientRect().height
@@ -62,11 +62,14 @@ export let sketch = (sketch) => {
 
     video.hide();
 
+    let button = sketch.select('#button-capture');
+    button.mousePressed(sketch.exportImage);
+
   };
 
   sketch.draw = () => {
     sketch.clear()
-    sketch.background(10,200)
+    sketch.background(10, 200)
 
     // sketch.push()
     // sketch.image(video, 0, 0, width, height);
@@ -75,6 +78,22 @@ export let sketch = (sketch) => {
     // sketch.pop()
 
     facemesh.draw();
-  };
-}
 
+  };
+
+  sketch.exportImage = () => {
+    let pg = sketch.createGraphics(width, height);
+
+    pg.image(video, 0, 0, width, height);
+    // pg.filter(sketch.THRESHOLD);
+    pg.tint(255, 127);
+    facemesh.overlay(pg);
+
+    var canvas = pg.canvas;
+    var dataURL = canvas.toDataURL("image/png");
+    var newTab = window.open('about:blank', 'image from canvas');
+    newTab.document.write("<img src='" + dataURL + "' alt='from canvas'/>");
+  }
+
+
+}
