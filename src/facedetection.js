@@ -20,7 +20,9 @@ export const start_hydra = () => {
       .rotate(rotation / 4)
       .repeat(openingX * 6 + 5, openingY * 6 + 5, height1, heigth2)
       .modulate(o0, 0.2 - 3 * openingY)
-      .saturate((height1 + heigth2) / 2)
+      .saturate(() => (Math.sin(time * 0.1)+1)/2)
+      .pixelate(100,100)
+      .blend(o0)
       .out();
     render(o0);
   }
@@ -64,12 +66,13 @@ export let sketch = (sketch) => {
 
   sketch.draw = () => {
     sketch.clear()
+    sketch.background(10,200)
 
-    sketch.push()
-    sketch.image(video, 0, 0, width, height);
+    // sketch.push()
+    // sketch.image(video, 0, 0, width, height);
     // sketch.filter(sketch.THRESHOLD);
-    sketch.tint(255, 127);
-    sketch.pop()
+    // sketch.tint(255, 127);
+    // sketch.pop()
 
     facemesh.draw();
   };

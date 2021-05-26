@@ -32,7 +32,7 @@ export default class FaceMesh {
 
     drawKeypoints() {
         for (let i = 0; i < this.predictions.length; i += 1) {
-            const keypoints = this.predictions[i].scaledMesh;
+            const keypoints = this.predictions[i].mesh;
 
             // Draw facial keypoints.
             for (let j = 0; j < keypoints.length; j += 1) {
@@ -41,7 +41,7 @@ export default class FaceMesh {
                 this.sketch.push();
                 this.sketch.fill(255);
                 this.sketch.noStroke();
-                this.sketch.ellipse(x, y, 4, 4);
+                this.sketch.ellipse(x*2.5+80, y*2.5, 4, 4);
                 this.sketch.pop();
             }
 

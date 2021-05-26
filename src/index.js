@@ -14,13 +14,12 @@ window.onEntrarClick = () => {
 }
 
 window.onAceptar = () => {
-    const containerElement = document.getElementById('p5js-container')
-    const p5Instance = new p5(facedetection.sketch, containerElement);
-    console.log(facedetection)
-    facedetection.start_hydra();
     document.getElementById("overlay-aceptar").style.display = "none";
     document.getElementById("landing-box").style.display = "none";
     document.getElementById("entrar-button").style.display = "none";
+    document.getElementById("info-button").style.color = "white";
+    document.getElementById("button-capture").style.display = "block";
+    const containerElement = document.getElementById('p5js-container')
+    const p5Instance = new p5(facedetection.sketch, containerElement);
+    facedetection.start_hydra();
 }
-
-console.log('hola!')
