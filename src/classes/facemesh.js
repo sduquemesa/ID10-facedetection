@@ -2,7 +2,7 @@ import ml5 from "ml5";
 export default class FaceMesh {
 
     constructor(video, sketch) {
-        this.facemesh = ml5.facemesh(video, {maxFaces: 1},() => console.log("Facemesh model ready!"));
+        this.facemesh = ml5.facemesh(video, { maxFaces: 1 }, () => console.log("Facemesh model ready!"));
         this.predictions = [];
         this.facemesh.on("predict", results => {
             this.predictions = results;
@@ -12,6 +12,27 @@ export default class FaceMesh {
 
     draw() {
         this.drawKeypoints();
+    }
+
+    overlay(pg) {
+        for (let i = 0; i < this.predictions.length; i += 1) {
+            const keypoints = this.predictions[i].scaledMesh;
+            // Shuffle array
+            this.shuffle(keypoints)
+
+            // Draw facial keypoints.
+            for (let j = 0; j < keypoints.length - 1; j += 1) {
+                const [x1, y1] = keypoints[j];
+                const [x2, y2] = keypoints[j + 1];
+
+                pg.push();
+                pg.stroke(0, 200);
+                pg.strokeWeight(1);
+                pg.line(x1, y1, x2, y2);
+                pg.pop();
+            }
+        }
+
     }
 
     // drawKeypoints() {
@@ -41,12 +62,12 @@ export default class FaceMesh {
                 this.sketch.push();
                 this.sketch.fill(255);
                 this.sketch.noStroke();
-                this.sketch.ellipse(x*2.5+80, y*2.5, 4, 4);
+                this.sketch.ellipse(x * 2.5 + 80, y * 2.5, 4, 4);
                 this.sketch.pop();
             }
 
             // Shuffle array
-            this.shuffle(keypoints)
+            // this.shuffle(keypoints)
 
             // Draw facial keypoints.
             // for (let j = 0; j < keypoints.length-1; j += 1) {

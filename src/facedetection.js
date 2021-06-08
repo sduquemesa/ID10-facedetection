@@ -2,9 +2,12 @@ import "./styles.css";
 import p5 from "p5/lib/p5.min.js";
 import FaceMesh from "./classes/facemesh";
 import Hydra from 'hydra-synth';
+import QRCode from 'qrcode';
 
 let facemesh;
 var sketchRef;
+var url;
+var canvas;
 
 export const start_hydra = () => {
   const hydra = new Hydra({
@@ -53,7 +56,7 @@ export let p5sketch = (sketch) => {
   const height = containerElement.getBoundingClientRect().height
 
   sketch.setup = () => {
-    const canvas = sketch.createCanvas(width, height);
+    canvas = sketch.createCanvas(width, height);
 
     video = sketch.createCapture(sketch.VIDEO);
     video.size(width, height);
@@ -85,15 +88,45 @@ export let p5sketch = (sketch) => {
     let pg = sketch.createGraphics(width, height);
 
     pg.image(video, 0, 0, width, height);
-    // pg.filter(sketch.THRESHOLD);
-    pg.tint(255, 127);
+    pg.filter(sketch.POSTERIZE,10);
+    pg.tint(255,  100);
     facemesh.overlay(pg);
 
     var canvas = pg.canvas;
     var dataURL = canvas.toDataURL("image/png");
+    var data = atob( dataURL.substring( "data:image/png;base64,".length ) ),
+    asArray = new Uint8Array(data.length);
+    for( var i = 0, len = data.length; i < len; ++i ) {
+      asArray[i] = data.charCodeAt(i);
+  }
+  var blob = new Blob( [ asArray.buffer ], {type: "image/png"} );
     var newTab = window.open('about:blank', 'image from canvas');
     newTab.document.write("<img src='" + dataURL + "' alt='from canvas'/>");
+    let form = new FormData();
+    form.append('upload',blob)
+    fetch('http://localhost:3000/upload', {
+      method: 'POST',
+      body: form
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      url = data.url
+
+      sketch.clear()
+      sketch.noLoop()
+      sketch.clear()
+
+      document.getElementById('qr-container').style.display = "block";
+
+      QRCode.toCanvas(document.getElementById('qr-canvas'), url, function (error) {
+        if (error) console.error(error)
+        console.log(canvas);
+      })
+
+    });
   }
+
 
 
 }
